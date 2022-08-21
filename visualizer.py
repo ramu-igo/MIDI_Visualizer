@@ -32,8 +32,7 @@ BOMB_IMG_ROOT = "data/bomb"
 HAMON_IMG_ROOT = "data/hamon"
 
 # MIDIポート指定
-out_port_name = mido.get_output_names()[0] # default port
-midi_out_port = mido.open_output(out_port_name)
+MIDI_PORT_NAME = mido.get_output_names()[0] # default port
 
 # フレームレート (fps)
 FRAME_RATE = 120
@@ -155,6 +154,7 @@ def main():
     Bomb.containers = bombs, all
     Explosion.containers = all
 
+    midi_out_port = mido.open_output(MIDI_PORT_NAME)
     midi_evts = load_midi_events(MIDI_FILE, bomb_life_ticks=BOMB_LIFE_MS,
                                  set_track=True)
     evt_num = len(midi_evts)
